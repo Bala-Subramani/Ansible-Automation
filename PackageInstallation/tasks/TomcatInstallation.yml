@@ -1,0 +1,27 @@
+---
+# tasks file for Final
+#- name: Download Apache Tomcat
+#  get_url: url=http://ftp.itu.edu.tr/Mirror/Apache/tomcat/tomcat-8/v8.5.9/bin/apache-tomcat-8.5.9.tar.gz dest=/opt/
+
+- name: Extract the Apache Tomcat
+  command: chdir=/usr/share /bin/tar xvf /opt/apache-tomcat-8.5.9.tar.gz -C /opt
+
+- name: Create Symbolic Link
+  file: src=/opt/apache-tomcat-8.5.9 path=/usr/share/tomcat state=link
+
+#- name: Change the ownership of Tomcat Directory
+#  file: path=/usr/share/tomcat/ owner=tomcat group=tomcat state=directory mode=0755 recurse=yes
+
+- name: Configure the updated tomcat configuration file
+  template: src=server.cfg.j2 dest=/usr/share/tomcat/conf/
+
+#- name: Copy tomcat init script
+#  copy: src=tomcatinit.sh dest=/etc/init.d/tomcat mode=0755
+
+#- name: Start Tomcat
+#  service: name=tomcat state=started enabled=yes
+
+- name: Start the Tomcat Service
+  shell: sh startup.sh >> /usr/share/tomcat/bin/one
+  args: 
+    chdir: /usr/share/tomcat/bin/

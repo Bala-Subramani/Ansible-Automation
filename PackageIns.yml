@@ -1,0 +1,10 @@
+---
+- name: Java, Nginx & Tomcat Installation 
+  hosts: client
+
+  roles:
+    - PackageInstallation
+
+      
+  
+  

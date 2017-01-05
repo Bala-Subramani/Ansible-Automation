@@ -1,0 +1,13 @@
+---
+# tasks file for Final
+- name: Extract Java Archive
+  command: chdir=/usr/share /bin/tar xvf /opt/jre-8u111-linux-x64.tar.gz -C /opt/
+
+- name: Change the ownership and Mode Recursively
+  file: path=/opt/jre1.8.0_111 owner=root group=root mode=0755 recurse=yes
+
+- name: Creating the Symbolic Link 
+  file: src=/opt/jre1.8.0_111/bin/java dest=/etc/alternatives/java state=link
+
+- name: Creating the Symbolic Link to make as default Java
+  file: src=/etc/alternatives/java dest=/usr/bin/java state=link

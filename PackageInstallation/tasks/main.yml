@@ -1,0 +1,6 @@
+---
+# tasks file for Final
+  
+- include: JavaInstallation.yml
+- include: TomcatInstallation.yml
+- include: NginxInstallation.yml
